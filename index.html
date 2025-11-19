@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pringgasela Tenun - NeoGlass Parallax</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+
+    <style>
+        /* === BACKGROUND GRADIENT === */
+        body {
+            background: linear-gradient(to bottom, #D6F4ED, #9FDBDF);
+        }
+
+        /* === SECTION KONTAK 2 KOLOM === */
+        .kontak-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        .kontak-info {
+            text-align: left;
+        }
+
+        .map-responsive {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            height: 350px;
+        }
+
+        .map-responsive iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* Responsive: jadi 1 kolom */
+        @media (max-width: 768px) {
+            .kontak-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+        /* NAVBAR */
+        .navbar {
+            background: #473472 !important;
+        }
+
+        .navbar .nav-link,
+        .navbar-brand {
+            color: #fff !important;
+        }
+
+        .cart-badge {
+            background: #FF3B3B;
+            padding: 2px 6px;
+            border-radius: 50%;
+            font-size: 10px;
+            position: absolute;
+            top: 2px;
+            right: -6px;
+        }
+
+        /* HERO GRADIENT BACKGROUND */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #87BAC3 0%, #5C8A97 50%, #3C5C66 100%);
+            background-size: cover;
+            background-position: center;
+            padding-top: 120px;
+            padding-bottom: 80px;
+        }
+
+        /* GLASS EFFECT CARD */
+        .glass-hero {
+            background: rgba(255, 255, 255, 0.18);
+            border-radius: 20px;
+            backdrop-filter: blur(9px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+
+        /* ACCENT */
+        .accent {
+            color: #473472;
+            font-weight: bold;
+        }
+
+        .icon-accent {
+            color: #473472;
+        }
+
+        /* RESPONSIVE BUTTON */
+        .btn-primary {
+            background: #53629E;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: #3e4f82;
+        }
+
+        @media (max-width: 768px) {
+            .btn-lg {
+                padding: 8px 14px !important;
+                font-size: 14px !important;
+            }
+        }
+
+
+        /* CARD */
+
+        .product-card .card {
+            background: #87BAC3;
+            border-radius: 14px;
+            border: none;
+        }
+
+        .product-card img {
+            border-radius: 14px 14px 0 0;
+        }
+
+        /* SECTION */
+        .section-normal {
+            padding: 100px 0;
+        }
+
+        .section-normal h2 {
+            color: #473472;
+            font-weight: bold;
+        }
+
+        /* BUTTON */
+        .btn-primary {
+            background: #53629E;
+            border: none;
+        }
+
+        .btn-success {
+            background: #473472;
+            border: none;
+        }
+
+        /* PARALLAX */
+        /* === FIX BACKGROUND FULL WIDTH & FIXED (SEMUA PARALLAX / HERO) === */
+        .hero,
+        .parallax-tentang {
+            width: 100%;
+            min-height: auto;
+            background-size: cover !important;
+            background-position: center !important;
+            background-attachment: fixed;
+        }
+
+        /* === RESPONSIVE TEXT AGAR MENGECIL DI MOBILE === */
+        /* PERBESAR TULISAN UTAMA DI HERO */
+        .hero h1.display-5 {
+            font-size: clamp(40px, 8vw, 62px) !important;
+            line-height: 1.1;
+        }
+
+        .hero .accent {
+            font-size: clamp(28px, 6vw, 48px) !important;
+            display: block;
+            margin-top: 6px;
+        }
+
+
+        .lead {
+            font-size: clamp(14px, 3vw, 20px);
+        }
+
+        .navbar .nav-link {
+            font-size: clamp(12px, 2.6vw, 16px);
+        }
+
+        /* Hero small text */
+        .hero .fw-bold {
+            font-size: clamp(14px, 3vw, 18px);
+        }
+
+        /* Title section */
+        .section-normal h2 {
+            font-size: clamp(20px, 4.5vw, 32px);
+        }
+
+        /* Card title */
+        .card h5 {
+            font-size: clamp(14px, 3.5vw, 18px);
+        }
+
+        /* Button lebih responsif */
+        .btn {
+            font-size: clamp(12px, 2.8vw, 16px);
+            padding: clamp(6px, 2vw, 12px) clamp(12px, 3vw, 24px);
+        }
+
+        /* Navbar brand responsive */
+        .navbar-brand {
+            font-size: clamp(16px, 4.5vw, 22px);
+        }
+
+        /* Ikon ikut mengecil */
+        .icon-accent,
+        .bi,
+        .fas {
+            font-size: clamp(18px, 4.5vw, 26px) !important;
+        }
+
+
+
+        /* ICON SOSIAL */
+        .social-icons a {
+            font-size: 28px;
+            margin: 0 10px;
+            color: #53629E;
+        }
+
+        /* CARD TANPA GLASS (NORMAL) */
+        .glass-card {
+            background: none !important;
+            backdrop-filter: none !important;
+            border: none !important;
+            padding: 0 !important;
+        }
+
+        /* ==== ANIMASI SCROLL ==== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.9s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Slide Left */
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: all 0.9s ease;
+        }
+
+        .reveal-left.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Slide Right */
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(60px);
+            transition: all 0.9s ease;
+        }
+
+        .reveal-right.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Zoom In */
+        .reveal-zoom {
+            opacity: 0;
+            transform: scale(0.85);
+            transition: all 0.9s ease;
+        }
+
+        .reveal-zoom.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Smooth parallax fade */
+        .parallax-tentang {
+            position: relative;
+        }
+
+        .parallax-tentang::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.05);
+            backdrop-filter: brightness(95%);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">Pringgasela Tenun</a>
+            <button class="navbar-toggler bg-light" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="#tentang">Tentang</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#tenun">Tenun</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#galeri">Galeri</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#belanja">Belanja</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#kontak">Kontak</a></li>
+
+                    <li class="nav-item position-relative">
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#cartModal">
+                            <i class="fas fa-shopping-cart fa-lg"></i>
+                            <span id="cart-count" class="cart-badge">0</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION BARU -->
+    <header id="home" class="hero text-white">
+        <div class="container">
+            <div class="row align-items-center">
+
+                <div class="col-lg-7">
+                    <div class=" p-4 p-md-5 ">
+
+                        <h1 class="display-5 fw-bold reveal-left">
+                            Tenun Pringgasela<br>
+                            <span class="accent">Warisan Budaya Takbenda</span>
+                        </h1>
+
+                        <p class="lead mt-3 reveal">
+
+                            Kerajinan tenun tradisional dari Lombok Timur — dibuat dengan benang alami,
+                            motif khas, dan teknik gedogan turun-temurun.
+                        </p>
+
+                        <div class="d-flex gap-2 mt-3">
+                            <a href="#belanja" class="btn btn-primary btn-lg shadow">Lihat Produk</a>
+                        </div>
+
+                        <div class="mt-4 d-flex flex-wrap gap-4">
+
+                            <div class="d-flex align-items-center gap-2 reveal-right">
+
+                                <i class="bi bi-people-fill fs-3 icon-accent"></i>
+                                <div>
+                                    <div class="fw-bold">Pengrajin</div>
+                                    <small>Komunitas perempuan setempat</small>
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-center gap-2 reveal-right">
+
+                                <i class="bi bi-calendar2-event-fill fs-3 icon-accent"></i>
+                                <div>
+                                    <div class="fw-bold">Warisan 2018</div>
+                                    <small>Penetapan Warisan Budaya Takbenda</small>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- TENTANG - PARALLAX -->
+    <section id="tentang" class="parallax-tentang"
+        style="background-image: url('tenunbg3.png'); background-size: cover; background-position: center;">
+        <div class="container">
+
+            <div class="rounded-4 text-dark" style="padding: 30px 25px; backdrop-filter: blur(6px);">
+
+                <h2 class="fw-bold mb-3">Tentang Kami</h2>
+
+                <p id="tentang-text">
+                    Kecamatan Pringgasela di Lombok Timur dikenal sebagai sentra tenun tradisional Suku Sasak yang unik,
+                    di mana motif-motifnya mencerminkan perpaduan budaya lokal dan ajaran Islam, menjadikannya simbol
+                    integral dari kehidupan masyarakat adat. Menurut Budayawan Sareh Erwin, kain tenun Pringgasela
+                    memiliki
+                    makna filosofis mendalam yang merefleksikan tiga aspek siklus hidup manusia: kelahiran
+                    (Sabok Beranak, Sabok Besunat, Sabok Bekuris untuk aqiqah), kehidupan (Bidadari Ngamok untuk
+                    bimbingan, Pucuk Rebong untuk semangat positif), dan kematian (Reragian Bebasak sebagai kain kafan,
+                    Reragian Lelangit yang digantung di atas jenazah, Reragian Osap sebagai penutup wajah/kitab suci,
+                    dan Sekurdi sebagai penutup jenazah). Motif-motif ini, khususnya Reragian Osap dengan dasar putih,
+                    merah, dan biru, sangat disucikan. Untuk melestarikan warisan leluhur, masyarakat Pringgasela
+                    melibatkan anak-anak sejak usia dini dalam menenun menggunakan alat tradisional (gedogan) dan bahan
+                    baku alami (kapas, rayon, pewarna kulit kayu), memastikan tradisi tenun tetap hidup dan berkembang
+                    di tengah modernisasi.
+                </p>
+
+                <button id="toggle-tentang" class="btn btn-primary mt-2">
+                    Lihat Selengkapnya
+                </button>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- PROSES TENUN (CARD LENGKAP) -->
+    <section id="tenun" class="section-normal">
+        <div class="container">
+            <div class="glass-card">
+                <h2>Proses Pembuatan Tenun</h2>
+
+                <div class="row g-4 mt-4">
+
+                    <div class="col-md-3">
+                        <div class="card product-card reveal-zoom">
+
+                            <img src="tenunbg.png" class="card-img-top">
+                            <div class="card-body">
+                                <h5>Pembuatan Benang</h5>
+                                <p>Proses awal memintal kapas menjadi benang halus.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="card product-card reveal-zoom">
+
+                            <img src="tenunbg2.jpg" class="card-img-top">
+                            <div class="card-body">
+                                <h5>Pewarnaan</h5>
+                                <p>Benang diwarnai dengan pewarna alami khas Lombok.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="card product-card reveal-zoom">
+
+                            <img src="https://source.unsplash.com/350x350/?loom,weaving" class="card-img-top">
+                            <div class="card-body">
+                                <h5>Penyasakan</h5>
+                                <p>Benang disusun rapi untuk menentukan pola tenunan.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="card product-card reveal-zoom">
+
+                            <img src="https://source.unsplash.com/350x350/?pattern,motif" class="card-img-top">
+                            <div class="card-body">
+                                <h5>Pembuatan Motif</h5>
+                                <p>Motif khas Pringgasela dibuat dengan teknik tradisional.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- GALERI -->
+    <section id="galeri" class="section-normal">
+        <div class="container">
+            <div class="glass-card">
+                <h2>Galeri Tenun</h2>
+                <div class="row g-4 mt-3">
+
+                    <div class="col-md-4 reveal-zoom"><img src="tenunbg.png" class="img-fluid rounded"></div>
+                    <div class="col-md-4 reveal-zoom"><img src="tenunbg.png" class="img-fluid rounded"></div>
+                    <div class="col-md-4 reveal-zoom"><img src="tenunbg.png" class="img-fluid rounded"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BELANJA -->
+    <section id="belanja" class="section-normal">
+        <div class="container">
+            <div class="glass-card">
+                <h2>Belanja Produk</h2>
+
+                <div class="row g-4 mt-3">
+
+
+                    <div class="col-md-4 product-card reveal-left">
+                        <div class="card">
+                            <img src="tenunbg2.jpg" class="card-img-top">
+                            <div class="card-body">
+                                <h5>Kain Tenun A</h5>
+                                <p>Rp 150.000</p>
+                                <button class="btn btn-primary add-to-cart" data-product="Kain Tenun A"
+                                    data-price="150000">Keranjang</button>
+                                <button class="btn btn-success order-wa" data-product="Kain Tenun A">Pesan WA</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 product-card reveal-left">
+                        <div class="card">
+                            <img src="tenunbg.png" class="card-img-top">
+                            <div class="card-body">
+                                <h5>Kain Tenun B</h5>
+                                <p>Rp 200.000</p>
+                                <button class="btn btn-primary add-to-cart" data-product="Kain Tenun B"
+                                    data-price="200000">Keranjang</button>
+                                <button class="btn btn-success order-wa" data-product="Kain Tenun B">Pesan WA</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- KONTAK -->
+    <section id="kontak" class="section-normal">
+        <div class="container">
+            <div class="glass-card p-4">
+
+                <h2 class="mb-4 fw-bold text-center">Kontak Kami</h2>
+
+                <div class="kontak-wrapper reveal">
+
+
+                    <!-- Info Kontak Kiri -->
+                    <div class="kontak-info">
+                        <div class="social-icons mb-4" style="font-size: 32px;">
+                            <a href="#" class="mx-2 text-dark"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="mx-2 text-dark"><i class="fab fa-facebook"></i></a>
+                            <a href="#" class="mx-2 text-dark"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+
+                        <p class="mb-2"><strong>Alamat:</strong> Pringgasela, Lombok Timur, NTB</p>
+                        <p class="mb-2"><strong>Email:</strong> info@pringgasela.com</p>
+                        <p class="mb-2"><strong>Telepon:</strong> +62 812-3456-7890</p>
+                    </div>
+
+                    <!-- Google Maps Kanan -->
+                    <div class="map-responsive">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1599.0291482267276!2d116.48061832900474!3d-8.585703677615529!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dcc4a44f168ae5d%3A0xf866d6f1ea6a2feb!2sPringgasela%20Hand%20Weaving!5e1!3m2!1sid!2sid!4v1763539087140!5m2!1sid!2sid"
+                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- MODAL CART -->
+    <div class="modal fade" id="cartModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5>Keranjang Belanja</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="cart-items"></div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" id="checkout-wa">Pesan Semua via WA</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOOTSTRAP JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        let cart = [];
+        const cartCount = document.getElementById('cart-count');
+        const cartItems = document.getElementById('cart-items');
+
+        document.querySelectorAll('.add-to-cart').forEach(btn => {
+            btn.addEventListener('click', () => {
+                cart.push({
+                    product: btn.dataset.product,
+                    price: btn.dataset.price
+                });
+                updateCart();
+            });
+        });
+
+        function updateCart() {
+            cartCount.textContent = cart.length;
+            cartItems.innerHTML = cart.map(item =>
+                `<p>${item.product} - Rp ${item.price}</p>`
+            ).join('');
+        }
+
+        document.querySelectorAll('.order-wa').forEach(btn => {
+            btn.addEventListener('click', () => {
+                window.open(
+                    `https://wa.me/6282280604622?text=Pesan%20${encodeURIComponent(btn.dataset.product)}`,
+                    '_blank'
+                );
+            });
+        });
+
+        document.getElementById('checkout-wa').addEventListener('click', () => {
+            const msg = cart.map(i => `${i.product} - Rp ${i.price}`).join('%0A');
+            window.open(`https://wa.me/6282280604622?text=Pesanan:%0A${msg}`, '_blank');
+        });
+
+        /* === FIX TOGGLE TENTANG === */
+        const tentangTextEl = document.getElementById("tentang-text");
+        const toggleBtn = document.getElementById("toggle-tentang");
+
+        const fullText = tentangTextEl.innerHTML;
+        const shortText = fullText.substring(0, 300) + "...";
+
+        let expanded = false;
+
+        // Default: tampilkan pendek
+        tentangTextEl.innerHTML = shortText;
+
+        toggleBtn.addEventListener("click", () => {
+            expanded = !expanded;
+
+            if (expanded) {
+                tentangTextEl.innerHTML = fullText;
+                toggleBtn.textContent = "Lihat Lebih Sedikit";
+            } else {
+                tentangTextEl.innerHTML = shortText;
+                toggleBtn.textContent = "Lihat Selengkapnya";
+            }
+        });
+
+
+        /* ==== ANIMASI SCROLL REVEAL ==== */
+        const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-zoom');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        reveals.forEach(el => observer.observe(el));
+
+
+
+        /* ==== PARALLAX SMOOTH HERO ==== */
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            hero.style.backgroundPositionY = -(scrolled * 0.2) + 'px';
+        });
+
+        /* === AUTO CLOSE NAVBAR ON LINK CLICK (MOBILE) === */
+        const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+        const navbarCollapse = document.getElementById('navMenu');
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+                    toggle: false
+                });
+                bsCollapse.hide();
+            });
+        });
+
+        /* === CLOSE NAVBAR WHEN CLICKING OUTSIDE === */
+        document.addEventListener('click', function (event) {
+            const isClickInside = navbarCollapse.contains(event.target);
+            const isNavbarToggler = event.target.closest('.navbar-toggler');
+
+            if (!isClickInside && !isNavbarToggler) {
+                const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+                    toggle: false
+                });
+                bsCollapse.hide();
+            }
+        });
+
+        /* === AUTO SMOOTH SCROLL === */
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href'))
+                    .scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        /* === NAVBAR AUTO HIDE SAAT SCROLL === */
+        let lastScroll = 0;
+        const nav = document.querySelector('.navbar');
+
+        window.addEventListener('scroll', () => {
+            let currentScroll = window.pageYOffset;
+
+            if (currentScroll <= 0) {
+                nav.style.top = "0";
+                return;
+            }
+
+            if (currentScroll > lastScroll) {
+                // Scroll ke bawah → navbar menghilang
+                nav.style.top = "-80px";
+            } else {
+                // Scroll ke atas → navbar muncul
+                nav.style.top = "0";
+            }
+
+            lastScroll = currentScroll;
+        });
+
+
+
+    </script>
+
+
+
+</body>
+
+</html>
